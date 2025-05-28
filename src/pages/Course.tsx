@@ -16,75 +16,89 @@ import {
   ArrowLeft,
   Clock,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  MapPin
 } from "lucide-react";
 
 const Course = () => {
   const { courseId } = useParams();
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Mock course data - replace with real data from your backend
+  // Tanzania-specific course data
   const course = {
     id: courseId,
-    code: "CS101",
-    name: "Introduction to Computer Science",
-    semester: "Fall 2024",
-    stream: "Regular",
-    instructor: "Dr. Sarah Johnson",
-    description: "An introduction to computer science concepts, programming fundamentals, and problem-solving techniques."
+    code: "ICT201",
+    name: "Computer Programming Fundamentals",
+    semester: "Semester 1 - 2024",
+    stream: "Regular (Mchana)",
+    instructor: "Dr. Amina Mwalimu",
+    description: "Utangulizi wa misingi ya upangaji kazi wa kompyuta, algoritma, na suluhisho la matatizo kwa kutumia lugha za kiprogramu.",
+    university: "University of Dar es Salaam"
   };
 
   const materials = [
     {
       id: 1,
-      title: "Introduction to Programming",
+      title: "Introduction to Programming - Utangulizi wa Upangaji",
       type: "PDF",
       size: "2.4 MB",
-      uploadDate: "Oct 15, 2024",
-      downloads: 45
+      uploadDate: "15 Oktoba, 2024",
+      downloads: 45,
+      language: "English/Kiswahili"
     },
     {
       id: 2,
-      title: "Data Structures Overview",
+      title: "Data Structures Overview - Muundo wa Data",
       type: "Video",
-      size: "156 MB",
-      uploadDate: "Oct 18, 2024",
-      downloads: 32
+      size: "156 MB", 
+      uploadDate: "18 Oktoba, 2024",
+      downloads: 32,
+      language: "English"
     },
     {
       id: 3,
-      title: "Algorithm Analysis",
+      title: "Algorithm Analysis - Uchambuzi wa Algoriti",
       type: "PDF",
       size: "1.8 MB",
-      uploadDate: "Oct 20, 2024",
-      downloads: 28
+      uploadDate: "20 Oktoba, 2024",
+      downloads: 28,
+      language: "English/Kiswahili"
+    },
+    {
+      id: 4,
+      title: "Programming Examples - Mifano ya Upangaji",
+      type: "Code Files",
+      size: "500 KB",
+      uploadDate: "22 Oktoba, 2024",
+      downloads: 38,
+      language: "Code"
     }
   ];
 
   const assignments = [
     {
       id: 1,
-      title: "Programming Assignment 1",
-      description: "Implement basic sorting algorithms",
-      dueDate: "Oct 30, 2024",
+      title: "Programming Assignment 1 - Kazi ya Upangaji 1",
+      description: "Tekeleza algoritma za kimsingi za upangaji (Implement basic sorting algorithms)",
+      dueDate: "30 Oktoba, 2024",
       status: "submitted",
       grade: "85%",
-      submittedDate: "Oct 28, 2024"
+      submittedDate: "28 Oktoba, 2024"
     },
     {
       id: 2,
-      title: "Programming Assignment 2",
-      description: "Build a simple calculator application",
-      dueDate: "Nov 15, 2024",
+      title: "Programming Assignment 2 - Kazi ya Upangaji 2",
+      description: "Jenga programu ya kikokotoo (Build a simple calculator application)",
+      dueDate: "15 Novemba, 2024",
       status: "pending",
       grade: null,
       submittedDate: null
     },
     {
       id: 3,
-      title: "Final Project Proposal",
-      description: "Submit your final project proposal",
-      dueDate: "Nov 25, 2024",
+      title: "Final Project Proposal - Pendekezo la Mradi",
+      description: "Wasilisha pendekezo la mradi wako wa mwisho (Submit your final project proposal)",
+      dueDate: "25 Novemba, 2024",
       status: "not_submitted",
       grade: null,
       submittedDate: null
@@ -94,30 +108,39 @@ const Course = () => {
   const pastPapers = [
     {
       id: 1,
-      title: "Midterm Exam 2023",
+      title: "Mid-Semester Exam 2023 - Mtihani wa Kati wa Muhula",
       year: "2023",
-      semester: "Fall",
-      stream: "Regular",
+      semester: "Semester 1",
+      stream: "Regular (Mchana)",
       type: "PDF",
       size: "890 KB"
     },
     {
       id: 2,
-      title: "Final Exam 2023",
-      year: "2023",
-      semester: "Fall", 
-      stream: "Regular",
+      title: "Final Exam 2023 - Mtihani wa Mwisho",
+      year: "2023", 
+      semester: "Semester 1",
+      stream: "Regular (Mchana)",
       type: "PDF",
       size: "1.2 MB"
     },
     {
       id: 3,
-      title: "Midterm Exam 2022",
+      title: "Mid-Semester Exam 2022 - Mtihani wa Kati",
       year: "2022",
-      semester: "Fall",
-      stream: "Evening",
+      semester: "Semester 1", 
+      stream: "Evening (Jioni)",
       type: "PDF",
       size: "756 KB"
+    },
+    {
+      id: 4,
+      title: "Practical Exam 2023 - Mtihani wa Vitendo",
+      year: "2023",
+      semester: "Semester 1",
+      stream: "Regular (Mchana)",
+      type: "PDF",
+      size: "645 KB"
     }
   ];
 
@@ -137,11 +160,11 @@ const Course = () => {
   const getStatusText = (status: string) => {
     switch (status) {
       case "submitted":
-        return "Submitted";
+        return "Imewasilishwa";
       case "pending":
-        return "Pending Review";
+        return "Inasubiri Ukaguzi";
       case "not_submitted":
-        return "Not Submitted";
+        return "Haijawawilishwa";
       default:
         return status;
     }
@@ -150,23 +173,27 @@ const Course = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white shadow-sm border-b border-green-100">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="sm" asChild>
               <Link to="/dashboard">
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Dashboard
+                Rudi Dashibodi
               </Link>
             </Button>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-green-600 to-yellow-600 rounded-lg flex items-center justify-center">
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-gray-900">{course.code}</h1>
                 <p className="text-xs text-gray-500">{course.name}</p>
               </div>
+            </div>
+            <div className="ml-auto flex items-center gap-2 text-sm text-gray-600">
+              <MapPin className="w-4 h-4 text-green-600" />
+              <span>{course.university}</span>
             </div>
           </div>
         </div>
@@ -176,11 +203,12 @@ const Course = () => {
         {/* Course Info */}
         <div className="mb-8">
           <div className="flex flex-wrap items-center gap-4 mb-4">
-            <Badge variant="secondary">{course.semester}</Badge>
-            <Badge variant="outline">{course.stream}</Badge>
-            <span className="text-gray-600">Instructor: {course.instructor}</span>
+            <Badge variant="secondary" className="bg-green-100 text-green-800">{course.semester}</Badge>
+            <Badge variant="outline" className="border-yellow-500 text-yellow-700">{course.stream}</Badge>
+            <span className="text-gray-600">Mwalimu: {course.instructor}</span>
           </div>
-          <p className="text-gray-700">{course.description}</p>
+          <p className="text-gray-700 mb-2">{course.description}</p>
+          <p className="text-sm text-gray-500">Course description available in both English and Kiswahili</p>
         </div>
 
         {/* Search Bar */}
@@ -188,7 +216,7 @@ const Course = () => {
           <div className="relative max-w-md">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <Input
-              placeholder="Search materials..."
+              placeholder="Tafuta nyenzo..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -199,35 +227,36 @@ const Course = () => {
         {/* Content Tabs */}
         <Tabs defaultValue="materials" className="w-full">
           <TabsList className="grid w-full grid-cols-3 mb-6">
-            <TabsTrigger value="materials">Course Materials</TabsTrigger>
-            <TabsTrigger value="assignments">Assignments</TabsTrigger>
-            <TabsTrigger value="papers">Past Papers</TabsTrigger>
+            <TabsTrigger value="materials">Nyenzo za Masomo</TabsTrigger>
+            <TabsTrigger value="assignments">Kazi za Darasa</TabsTrigger>
+            <TabsTrigger value="papers">Mitihani ya Zamani</TabsTrigger>
           </TabsList>
 
           {/* Materials Tab */}
           <TabsContent value="materials">
             <div className="grid gap-4">
               {materials.map((material) => (
-                <Card key={material.id} className="hover:shadow-md transition-shadow">
+                <Card key={material.id} className="hover:shadow-md transition-shadow border-l-4 border-l-green-500">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                          <FileText className="w-6 h-6 text-blue-600" />
+                        <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                          <FileText className="w-6 h-6 text-green-600" />
                         </div>
                         <div>
                           <h3 className="font-semibold text-gray-900">{material.title}</h3>
                           <div className="flex items-center gap-4 text-sm text-gray-500">
                             <span>{material.type}</span>
                             <span>{material.size}</span>
-                            <span>Uploaded: {material.uploadDate}</span>
+                            <span>Ilipakiwa: {material.uploadDate}</span>
                             <span>{material.downloads} downloads</span>
+                            <Badge variant="outline" className="text-xs">{material.language}</Badge>
                           </div>
                         </div>
                       </div>
-                      <Button size="sm">
+                      <Button size="sm" className="bg-green-600 hover:bg-green-700">
                         <Download className="w-4 h-4 mr-2" />
-                        Download
+                        Pakua
                       </Button>
                     </div>
                   </CardContent>
@@ -240,7 +269,7 @@ const Course = () => {
           <TabsContent value="assignments">
             <div className="grid gap-4">
               {assignments.map((assignment) => (
-                <Card key={assignment.id} className="hover:shadow-md transition-shadow">
+                <Card key={assignment.id} className="hover:shadow-md transition-shadow border-l-4 border-l-yellow-500">
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
@@ -255,25 +284,25 @@ const Course = () => {
                         <div className="flex items-center gap-6 text-sm">
                           <div className="flex items-center gap-1">
                             <Calendar className="w-4 h-4 text-gray-400" />
-                            <span className="text-gray-600">Due: {assignment.dueDate}</span>
+                            <span className="text-gray-600">Muda: {assignment.dueDate}</span>
                           </div>
                           {assignment.submittedDate && (
-                            <span className="text-green-600">Submitted: {assignment.submittedDate}</span>
+                            <span className="text-green-600">Iliwasilishwa: {assignment.submittedDate}</span>
                           )}
                           {assignment.grade && (
-                            <span className="text-blue-600 font-medium">Grade: {assignment.grade}</span>
+                            <span className="text-blue-600 font-medium">Alama: {assignment.grade}</span>
                           )}
                         </div>
                       </div>
                       <div className="flex gap-2">
                         <Button size="sm" variant="outline">
                           <Download className="w-4 h-4 mr-2" />
-                          Download
+                          Pakua
                         </Button>
                         {assignment.status !== "submitted" && (
-                          <Button size="sm">
+                          <Button size="sm" className="bg-yellow-600 hover:bg-yellow-700">
                             <Upload className="w-4 h-4 mr-2" />
-                            Submit
+                            Wasilisha
                           </Button>
                         )}
                       </div>
@@ -288,17 +317,17 @@ const Course = () => {
           <TabsContent value="papers">
             <div className="grid gap-4">
               {pastPapers.map((paper) => (
-                <Card key={paper.id} className="hover:shadow-md transition-shadow">
+                <Card key={paper.id} className="hover:shadow-md transition-shadow border-l-4 border-l-red-500">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                          <FileText className="w-6 h-6 text-purple-600" />
+                        <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                          <FileText className="w-6 h-6 text-red-600" />
                         </div>
                         <div>
                           <h3 className="font-semibold text-gray-900">{paper.title}</h3>
                           <div className="flex items-center gap-4 text-sm text-gray-500">
-                            <span>{paper.year}</span>
+                            <span>Mwaka: {paper.year}</span>
                             <span>{paper.semester}</span>
                             <span>{paper.stream}</span>
                             <span>{paper.type}</span>
@@ -306,9 +335,9 @@ const Course = () => {
                           </div>
                         </div>
                       </div>
-                      <Button size="sm">
+                      <Button size="sm" className="bg-red-600 hover:bg-red-700">
                         <Download className="w-4 h-4 mr-2" />
-                        Download
+                        Pakua
                       </Button>
                     </div>
                   </CardContent>
