@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, FileText, Calendar, Search, Filter, Bell, User, LogOut, MapPin } from "lucide-react";
+import { BookOpen, FileText, Calendar, Search, Filter, Bell, User, LogOut, MapPin, Settings, HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
@@ -90,11 +90,25 @@ const Dashboard = () => {
                 <MapPin className="w-4 h-4 text-green-600" />
                 <span>University of Dar es Salaam</span>
               </div>
-              <Button variant="ghost" size="sm">
-                <Bell className="w-4 h-4" />
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/notifications">
+                  <Bell className="w-4 h-4" />
+                </Link>
               </Button>
-              <Button variant="ghost" size="sm">
-                <User className="w-4 h-4" />
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/profile">
+                  <User className="w-4 h-4" />
+                </Link>
+              </Button>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/settings">
+                  <Settings className="w-4 h-4" />
+                </Link>
+              </Button>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/help">
+                  <HelpCircle className="w-4 h-4" />
+                </Link>
               </Button>
               <Button variant="ghost" size="sm">
                 <Link to="/" className="flex items-center gap-2">
