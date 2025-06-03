@@ -14,7 +14,7 @@ import {
   Calendar,
   FileText,
   Trash2,
-  MarkAsUnread
+  Mail
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -151,7 +151,7 @@ const Notifications = () => {
                     <p className="text-sm text-gray-600">Unread</p>
                     <p className="text-2xl font-bold text-orange-600">{unreadCount}</p>
                   </div>
-                  <MarkAsUnread className="w-8 h-8 text-orange-600" />
+                  <Mail className="w-8 h-8 text-orange-600" />
                 </div>
               </CardContent>
             </Card>
