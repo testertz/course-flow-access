@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -23,6 +22,17 @@ import MaterialsManagement from "./pages/admin/MaterialsManagement";
 import UploadMaterial from "./pages/admin/UploadMaterial";
 import Analytics from "./pages/admin/Analytics";
 
+// Dashboard section with sidebar & nested pages
+import { StudentSidebar } from "@/components/dashboard/StudentSidebar";
+import UserDashboardHome from "./pages/dashboard/UserDashboardHome";
+import UserCourses from "./pages/dashboard/UserCourses";
+import UserAssignments from "./pages/dashboard/UserAssignments";
+import UserMaterials from "./pages/dashboard/UserMaterials";
+import UserProfile from "./pages/dashboard/UserProfile";
+import UserNotifications from "./pages/dashboard/UserNotifications";
+import UserSettings from "./pages/dashboard/UserSettings";
+import UserHelp from "./pages/dashboard/UserHelp";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -33,7 +43,16 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route index element={<UserDashboardHome />} />
+            <Route path="courses" element={<UserCourses />} />
+            <Route path="assignments" element={<UserAssignments />} />
+            <Route path="materials" element={<UserMaterials />} />
+            <Route path="profile" element={<UserProfile />} />
+            <Route path="notifications" element={<UserNotifications />} />
+            <Route path="settings" element={<UserSettings />} />
+            <Route path="help" element={<UserHelp />} />
+          </Route>
           <Route path="/course/:courseId" element={<Course />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/notifications" element={<Notifications />} />
