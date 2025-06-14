@@ -1,8 +1,14 @@
 
 import { BookOpen, MapPin } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { LoginModal } from "./LoginModal";
 
 export const Header = () => {
+  const [loginOpen, setLoginOpen] = useState(false);
+
   return (
     <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
@@ -18,7 +24,7 @@ export const Header = () => {
               <p className="text-xs text-gray-500 dark:text-gray-400">Student Academic Portal</p>
             </div>
           </div>
-          
+
           <nav className="hidden md:flex items-center gap-8">
             <a href="#features" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Features</a>
             <a href="#about" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
@@ -28,6 +34,9 @@ export const Header = () => {
 
           <div className="flex items-center gap-3">
             <ThemeToggle />
+            <Button variant="outline" size="sm" className="hidden md:inline-block" onClick={() => setLoginOpen(true)}>
+              Login
+            </Button>
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-blue-600" />
               <span className="text-sm text-gray-600 dark:text-gray-400">Tanzania</span>
@@ -35,6 +44,8 @@ export const Header = () => {
           </div>
         </div>
       </div>
+      <LoginModal open={loginOpen} onOpenChange={setLoginOpen} />
     </header>
   );
 };
+
